@@ -1,0 +1,73 @@
+# HTTP Server
+[server]
+	Address     = ":8199"
+	ServerRoot  = "public"
+	ServerAgent = "gf-app"
+	LogPath     = "/tmp/log/gf-app/server"
+# 系统的一些配置
+[system]
+    # API 服务的名字
+    apiServiceName = "storage"
+    # API的端口号
+    apiport = 9003
+    # 后台服务地址 prefix
+    backGlobal = "/arms"
+    # 接口请求限制 1分钟 20000次/ip
+    maxLimiter = 20000
+    # gcacheTimes 通用时间10分钟 缓存
+    gcacheTimes = 10
+    # iplocation 路径
+    iplocationDB = "/www/iplocation/IP2LOCATION-LITE-DB3.BIN"
+
+# 消息中心的配置
+[mqueue]
+    # 可以是多条地址记录
+    hosts = "127.0.0.1:9091"
+    # hosts = "mq.apiend.com"
+    # subscribe key
+    subscribe = "tracer"
+
+# Logger.
+# 日志配置信息
+[logger]
+    [logger.default]
+        Path = "/www/b.apiend.com/log/storage"
+        # 生产用 PROD 开发用 ALL
+        Level = "PROD"
+        header = true
+        Stdout = true
+        StStatus = 1
+        RotateExpire = "1d"
+        RotateBackupLimit = 1
+        RotateBackupExpire = "7d"
+        RotateBackupCompress = 9
+
+# Template.
+[viewer]
+    Path        = "template"
+    DefaultFile = "index.html"
+    Delimiters  =  ["{{", "}}"]
+
+# Database.
+[database]
+    link  = "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
+    debug = true
+    [database.user]
+        type = "sqlite"
+        link = "sqlite:/www/b.apiend.com/db/user.db"
+    # Database logger.
+    [database.logger]
+        Path   = "/tmp/log/gf-app/sql"
+        Level  = "all"
+        Stdout = true
+
+# mongodb 数据库链接
+[mongo]
+    # mongoURL
+    mongoUrl = "mongodb://tracer:tracer@127.0.0.1:27017/tracer"
+    # mongoName
+    mgoDbName = "tracer"
+    # 链接池大小
+    mgoPoolSize = 200
+    # 默认显示
+    SlowRes = 100
