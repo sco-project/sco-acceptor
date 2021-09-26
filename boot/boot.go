@@ -8,6 +8,7 @@ import (
 	"github.com/qiniu/qmgo"
 
 	"time"
+
 )
 
 func init() {
@@ -69,6 +70,9 @@ func init() {
 		MinPoolSize:      &minPoolSize,
 	}
 	_ = initClient(*cfg)
+
+	 // 启动 多个goroutine 用来批量插入及并发的问题
+
 
 
 }
