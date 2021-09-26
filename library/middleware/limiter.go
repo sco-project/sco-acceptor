@@ -14,8 +14,11 @@ import (
 	"time"
 )
 
-// Config ...
+// LimiterConfig Config ...
 type LimiterConfig struct {
+	// Environment dev or prod
+	// Default dev
+	Environment string
 	// Filter defines a function to skip middleware.
 	// Optional. Default: nil
 	Filter func(request *ghttp.Request) bool
@@ -32,18 +35,18 @@ type LimiterConfig struct {
 	// Default: 429 Too Many Requests
 	StatusCode int
 	// Key allows to use a custom handler to create custom keys
-	// Default: func(c *fiber.Ctx) string {
-	//   return c.IP()
+	// Default: func(c *ghttp.Request) string {
+	//   return c.GetClientIp()
 	// }
 	Key func(request *ghttp.Request) string
 	// Handler is called when a request hits the limit
-	// Default: func(c *fiber.Ctx) {
+	// Default: func(c *ghttp.Request) {
 	//   c.Status(cfg.StatusCode).SendString(cfg.Message)
 	// }
 	Handler func(request *ghttp.Request)
 }
 
-// 初始化
+// NewLimiter 初始化
 func NewLimiter(config ...LimiterConfig) func(r *ghttp.Request) {
 	// mutex for parallel read and write access
 	mux := &sync.Mutex{}
@@ -51,6 +54,9 @@ func NewLimiter(config ...LimiterConfig) func(r *ghttp.Request) {
 	var cfg LimiterConfig
 	if len(config) > 0 {
 		cfg = config[0]
+	}
+	if cfg.Environment == "" {
+		cfg.Environment = "dev"
 	}
 	if cfg.Timeout == 0 {
 		cfg.Timeout = 60
@@ -76,7 +82,7 @@ func NewLimiter(config ...LimiterConfig) func(r *ghttp.Request) {
 			// c.Status(cfg.StatusCode).SendString(cfg.Message)
 			// c.Response.Status(cfg.StatusCode)
 			c.Response.WriteStatus(cfg.StatusCode, cfg.Message)
-			glog.Println("限制访问")
+			glog.Println("限制访问==")
 		}
 	}
 	// Limiter settings
@@ -142,9 +148,12 @@ func NewLimiter(config ...LimiterConfig) func(r *ghttp.Request) {
 			return
 		}
 		// We can continue, update RateLimit headers
-		c.Response.Header().Set("X-RateLimit-Limit", strconv.Itoa(cfg.Max))
-		c.Response.Header().Set("X-RateLimit-Remaining", strconv.Itoa(remaining))
-		c.Response.Header().Set("X-RateLimit-Reset", strconv.Itoa(resetTime))
+		// FIXME: 开发的时候.可开启. 正常上线关闭
+		if cfg.Environment == "dev" {
+			c.Response.Header().Set("X-RateLimit-Limit", strconv.Itoa(cfg.Max))
+			c.Response.Header().Set("X-RateLimit-Remaining", strconv.Itoa(remaining))
+			c.Response.Header().Set("X-RateLimit-Reset", strconv.Itoa(resetTime))
+		}
 		// Bye!
 		c.Middleware.Next()
 	}

@@ -1,23 +1,27 @@
-# HTTP Server
-[server]
-	Address     = ":8199"
-	ServerRoot  = "public"
-	ServerAgent = "gf-app"
-	LogPath     = "/tmp/log/gf-app/server"
+## ------------------以下为,初始化的数据..-------------------------
 # 系统的一些配置
 [system]
+    # Environment 服务环境, 默认是dev 正式上线的时候修改 dev or prod
+    Environment = "dev"
     # API 服务的名字
     apiServiceName = "storage"
     # API的端口号
     apiport = 9003
     # 后台服务地址 prefix
     backGlobal = "/arms"
-    # 接口请求限制 1分钟 20000次/ip
-    maxLimiter = 20000
+    # 接口请求限制 1分钟 2000次/ip
+    maxLimiter = 2000
     # gcacheTimes 通用时间10分钟 缓存
     gcacheTimes = 10
     # iplocation 路径
     iplocationDB = "/www/iplocation/IP2LOCATION-LITE-DB3.BIN"
+    # gpool 是否开启 批量插入, 默认是true 开启
+    gpoolStatus = true
+    # gpool 消费者 10s 间隔
+    gpoolTimes = 10
+    # gpool 消费列表 100
+    itemNum = 100
+
 
 # 消息中心的配置
 [mqueue]
@@ -63,11 +67,19 @@
 
 # mongodb 数据库链接
 [mongo]
-    # mongoURL
-    mongoUrl = "mongodb://tracer:tracer@127.0.0.1:27017/tracer"
+    #  // user, password, database, rs0分别为用户名、密码、数据库、副本集，请自行修改
+    # mongodb://tracer:tracer@127.0.0.1:27017,127.0.0.1:27018/tracer?replicaSet=testSet"
+    # mongoURL"mongodb://tracer:tracer@localhost:27017/tracer"
+    mongoUrl = "mongodb://tracer:tracer@localhost:27017/tracer"
     # mongoName
     mgoDbName = "tracer"
     # 链接池大小
     mgoPoolSize = 200
     # 默认显示
     SlowRes = 100
+
+## ------------------以下为,运行中实时可读的数据,做好区分-------------------------
+# runtimes 运行中的
+[runtimes]
+    # test
+    testDome = "2qqqq2222test demo"
