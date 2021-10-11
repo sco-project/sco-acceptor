@@ -75,31 +75,31 @@ type PvMsg struct {
 // ErrorMsg 错误上报
 type ErrorMsg struct {
 	CommonMsg `bson:",inline"`
-	Etype     string `bson:"subtype" json:"st"`                                       // 子类别
-	Emsg      string `bson:"msg" json:"msg"`                                          // 信息
-	Ecate     string `bson:"cate,omitempty" json:"co,cate,omitempty" p:"cate"`        // 类别
-	Edetail   string `bson:"detail,omitempty" json:"det,detail,omitempty" p:"detail"` // 错误栈 或 出错标签
-	Efile     string `bson:"file,omitempty" json:"fe,file,omitempty" p:"file"`        // 出错文件
-	Eline     int    `bson:"line,omitempty"  json:"l,line,omitempty" p:"line"`        // 行
-	Ecol      int    `bson:"col,omitempty" json:"c,col,omitempty" p:"col"`            // 列
+	Etype     string `bson:"subtype" json:"st"`                         // 子类别
+	Emsg      string `bson:"msg" json:"msg"`                            // 信息
+	Ecate     string `bson:"cate,omitempty" json:"cate,omitempty" `     // 类别
+	Edetail   string `bson:"detail,omitempty" json:"detail,omitempty" ` // 错误栈 或 出错标签
+	Efile     string `bson:"file,omitempty" json:"file,omitempty" `     // 出错文件
+	Eline     int    `bson:"line,omitempty"  json:"line,omitempty"`     // 行
+	Ecol      int    `bson:"col,omitempty" json:"col,omitempty" `       // 列
 }
 
 // ResourceMsg 资源msg
 type ResourceMsg struct {
 	CommonMsg `bson:",inline"`
-	Rdom      int         `bson:"dom" json:"dom" p:"dom"`  //   // 所有解析时间 domInteractive - responseEnd
-	Rload     int         `bson:"load" json:"load" p:"lo"` // 所有资源加载完时间 loadEventStart- fetchStart
-	Rres      interface{} `bson:"res" json:"res" p:"res"`  // 资源信息
+	Rdom      int         `bson:"dom" json:"dom" `   //   // 所有解析时间 domInteractive - responseEnd
+	Rload     int         `bson:"load" json:"load" ` // 所有资源加载完时间 loadEventStart- fetchStart
+	Rres      interface{} `bson:"res" json:"res"`    // 资源信息
 }
 
 // ApiMsg Api上报
 type ApiMsg struct {
 	CommonMsg `bson:",inline"`
-	Aurl      string `bson:"ajaxurl" json:"url" p:"au"`     // 接口
-	Asuccess  bool   `bson:"success" json:"success" p:"su"` // 成功
-	Atime     int    `bson:"time" json:"time" p:"tms"`      // 耗时
-	Acode     string `bson:"code" json:"code" p:"ce"`       // http 返回的 FAILED
-	Amsg      string `bson:"msg" json:"msg" p:"msg"`        // 信息 与ErrorMsg 不会同时存在
+	Aurl      string `bson:"ajaxurl" json:"url" `     // 接口
+	Asuccess  bool   `bson:"success" json:"success" ` // 成功
+	Atime     int    `bson:"time" json:"time" `       // 耗时
+	Acode     string `bson:"code" json:"code" `       // http 返回的 FAILED
+	Amsg      string `bson:"msg" json:"msg" `         // 信息 与ErrorMsg 不会同时存在
 	// FIXME 后续看情况 是否增加下面一些字段
 	//method string  // 方法
 	//params  string // 参数
@@ -111,44 +111,44 @@ type ApiMsg struct {
 // HealthMsg 健康检查上报
 type HealthMsg struct {
 	CommonMsg `bson:",inline"`
-	Hhealthy  int `bson:"healthy" json:"healthy" p:"hl"`   // 健康？ 0/1
-	Hstay     int `bson:"stay" json:"stay" p:"sy"`         // 停留时间
-	Herrcount int `bson:"errcount" json:"errcount" p:"er"` // error次数
-	Hapisucc  int `bson:"apisucc" json:"apisucc" p:"suc"`  // api成功次数
-	Hapifail  int `bson:"apifail" json:"apifail" p:"fai"`  // api错误次数
+	Hhealthy  int `bson:"healthy" json:"healthy" `   // 健康？ 0/1
+	Hstay     int `bson:"stay" json:"stay" `         // 停留时间
+	Herrcount int `bson:"errcount" json:"errcount" ` // error次数
+	Hapisucc  int `bson:"apisucc" json:"apisucc" `   // api成功次数
+	Hapifail  int `bson:"apifail" json:"apifail" `   // api错误次数
 }
 
 // PerfMsg 页面性能上报
 type PerfMsg struct {
 	CommonMsg  `bson:",inline"`
-	Pdns       int    `bson:"dns" json:"dns" `                     // dns时间
-	Ptcp       int    `bson:"tcp" json:"tcp"`                      // tcp时间
-	Pssl       int    `bson:"ssl" json:"ssl"`                      // ssl时间
-	Pttfb      int    `bson:"ttfb" json:"ttfb" `                   // ResponseStart - RequestStart (首包时间，关注网络链路耗时)
-	Ptrans     int    `bson:"trans" json:"trans" p:"trs"`          // 重镜像 停留时间
-	Pdom       int    `bson:"dom" json:"dom"`                      // dom解析时间
-	Pres       int    `bson:"res" json:"res"`                      // 资源加载 停留时间
-	Pfirstbyte int    `bson:"firstbyte" json:"firstbyte" p:"fby"`  // 首字节时间
-	Pfpt       int    `bson:"fpt" json:"fpt"`                      // ResponseEnd - FetchStart （首次渲染时间 / 白屏时间）
-	Ptti       int    `bson:"tti" json:"tti"`                      // DomInteractive - FetchStart （首次可交付时间）
-	Pready     int    `bson:"ready" json:"ready"  p:"rdy"`         // DomContentLoadEventEnd - FetchStart （加载完成时间）
-	Pload      int    `bson:"load" json:"load"`                    // LoadEventStart - FetchStart （页面完全加载时间）
-	Pbandwidth int    `bson:"bandwidth" json:"bandwidth"  p:"bdh"` // 估计的带宽 单位M/s
-	Pnavtype   string `bson:"navtype" json:"navtype" p:"nty"`      // nav方式 如reload
+	Pdns       int    `bson:"dns" json:"dns" `             // dns时间
+	Ptcp       int    `bson:"tcp" json:"tcp"`              // tcp时间
+	Pssl       int    `bson:"ssl" json:"ssl"`              // ssl时间
+	Pttfb      int    `bson:"ttfb" json:"ttfb" `           // ResponseStart - RequestStart (首包时间，关注网络链路耗时)
+	Ptrans     int    `bson:"trans" json:"trans" `         // 重镜像 停留时间
+	Pdom       int    `bson:"dom" json:"dom"`              // dom解析时间
+	Pres       int    `bson:"res" json:"res"`              // 资源加载 停留时间
+	Pfirstbyte int    `bson:"firstbyte" json:"firstbyte" ` // 首字节时间
+	Pfpt       int    `bson:"fpt" json:"fpt"`              // ResponseEnd - FetchStart （首次渲染时间 / 白屏时间）
+	Ptti       int    `bson:"tti" json:"tti"`              // DomInteractive - FetchStart （首次可交付时间）
+	Pready     int    `bson:"ready" json:"ready" `         // DomContentLoadEventEnd - FetchStart （加载完成时间）
+	Pload      int    `bson:"load" json:"load"`            // LoadEventStart - FetchStart （页面完全加载时间）
+	Pbandwidth int    `bson:"bandwidth" json:"bandwidth" ` // 估计的带宽 单位M/s
+	Pnavtype   string `bson:"navtype" json:"navtype" `     // nav方式 如reload
 }
 
 // SumMsg 统计总量,每次都要传数值过来 可分组 通过 "group::key"
 type SumMsg struct {
 	CommonMsg `bson:",inline"`
-	Group     string `bson:"group" json:"group" p:"gr"` // 类tag 与key
-	Ukey      string `bson:"key" json:"key"`            // 取的是 ::key
-	Uval      int    `bson:"val" json:"val"`            // val
+	Group     string `bson:"group" json:"group" ` // 类tag 与key
+	Ukey      string `bson:"key" json:"key"`      // 取的是 ::key
+	Uval      int    `bson:"val" json:"val"`      // val
 }
 
 // AvgMsg  统计平均值  暂没有用到
 type AvgMsg struct {
 	CommonMsg `bson:",inline"`
-	Group     string `bson:"group" json:"group" p:"gr"`
+	Group     string `bson:"group" json:"group"  `
 	Ukey      string `bson:"key" json:"key"`
 	Uval      int    `bson:"val" json:"val"`
 }
@@ -156,7 +156,7 @@ type AvgMsg struct {
 // MsgMsg 手动上报的一些信息   "group::msg"
 type MsgMsg struct {
 	CommonMsg `bson:",inline"`
-	Group     string `bson:"group" json:"group" p:"gr"` // 分组key
+	Group     string `bson:"group" json:"group"  ` // 分组key
 	Msg       string `bson:"msg" json:"msg"`
 }
 

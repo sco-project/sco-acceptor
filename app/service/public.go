@@ -39,16 +39,16 @@ func CheckUpdateContent(update bson.M) error {
 
 // ExcludeDeleted 不包含已删除的
 func ExcludeDeleted(selector bson.M) bson.M {
-	selector["deletedAt"] = bson.M{"$exists": false}
+	selector["DeletedAt"] = bson.M{"$exists": false}
 	return selector
 }
 
 // UpdatedTime 更新updatedAt时间
 func UpdatedTime(update bson.M) bson.M {
 	if v, ok := update["$set"]; ok {
-		v.(bson.M)["updatedAt"] = time.Now()
+		v.(bson.M)["UpdatedAt"] = time.Now()
 	} else {
-		update["$set"] = bson.M{"updatedAt": time.Now()}
+		update["$set"] = bson.M{"UpdatedAt": time.Now()}
 	}
 	return update
 }
@@ -56,9 +56,9 @@ func UpdatedTime(update bson.M) bson.M {
 // DeletedTime 更新deletedAt时间
 func DeletedTime(update bson.M) bson.M {
 	if v, ok := update["$set"]; ok {
-		v.(bson.M)["deletedAt"] = time.Now()
+		v.(bson.M)["DeletedAt"] = time.Now()
 	} else {
-		update["$set"] = bson.M{"deletedAt": time.Now()}
+		update["$set"] = bson.M{"DeletedAt": time.Now()}
 	}
 	return update
 }
