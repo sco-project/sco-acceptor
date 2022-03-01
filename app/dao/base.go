@@ -8,8 +8,9 @@ package dao
 
 import (
 	"errors"
-	"go.mongodb.org/mongo-driver/bson"
 	"time"
+
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 var ErrNotFound = errors.New("not found")
