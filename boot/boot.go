@@ -1,11 +1,13 @@
 package boot
 
 import (
+	"github.com/Shopify/sarama"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/glog"
 	"github.com/gogf/gf/os/gtime"
 	"github.com/qiniu/qmgo"
+	"sco-acceptor/library/mq/kafka"
 
 	"time"
 
@@ -55,6 +57,12 @@ func init() {
 	//options := &PubOption{host: c.GetString("mqueue.hosts")}
 	//go NewMqCliet(*options)
 	//-------------- end
+	kCfg := &kConfig{
+		KafkaUrls:  c.GetStrings("kafka.hosts"),
+		KafkaTopic: c.GetString("kafka.topic"),
+	}
+	initMq(kCfg)
+	// --- end
 
 	// 初始化链接 mongodb
 	var timeout int64 = 50
@@ -71,8 +79,32 @@ func init() {
 	}
 	_ = initClient(*cfg)
 
-	 // 启动 多个goroutine 用来批量插入及并发的问题
+	// 启动 多个goroutine 用来批量插入及并发的问题
 
+}
 
+// 初始化 kafka 联接
+type kConfig struct {
+	KafkaUrls  []string
+	KafkaTopic string
+}
 
+// initMq 初始化 联接 kafka
+func initMq(conf *kConfig) {
+	// 生产者配置
+	kafkaConfig := sarama.NewConfig()
+	// 等待服务器所有副本都保存成功后的响应
+	kafkaConfig.Producer.RequiredAcks = sarama.WaitForAll
+	// 随机的分区类型：返回一个分区器，该分区器每次选择一个随机分区
+	kafkaConfig.Producer.Partitioner = sarama.NewReferenceHashPartitioner
+	// 是否等待成功和失败后的响应
+	kafkaConfig.Producer.Return.Successes = true
+	// buffer 每隔多少时间触发flush
+	kafkaConfig.Producer.Flush.Frequency = 5 * time.Second
+	// buffer 最多装多少条消息
+	kafkaConfig.Producer.Flush.MaxMessages = 10000
+	// buffer 装多少条消息触发flush
+	kafkaConfig.Producer.Flush.Messages = 200
+	// 初始化消息队列
+	kafka.InitProducer(conf.KafkaUrls, conf.KafkaTopic, kafkaConfig)
 }

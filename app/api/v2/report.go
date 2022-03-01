@@ -7,6 +7,8 @@
 package v2
 
 import (
+	"strings"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/glog"
@@ -14,12 +16,12 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"github.com/qiniu/qmgo/operator"
 	"go.mongodb.org/mongo-driver/bson"
+
 	"sco-acceptor/app/global"
 	"sco-acceptor/app/model"
 	"sco-acceptor/app/service"
 	"sco-acceptor/app/utils"
 	"sco-acceptor/library/chinaMap"
-	"strings"
 )
 
 // ReportCtl 上报的

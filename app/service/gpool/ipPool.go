@@ -8,13 +8,15 @@ package gpool
 
 import (
 	"fmt"
-	"sco-acceptor/app/service"
 	"time"
+
+
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/glog"
 
 	"sco-acceptor/app/global"
+	"sco-acceptor/app/service"
 )
 
 // ip collection
@@ -25,6 +27,7 @@ func ipConsumer() {
 	glog.Print("ipConsumer")
 
 	uticker := time.NewTicker(gpoolTimes * time.Second)
+
 	for {
 		<-uticker.C
 		g.Dump("=== IP Consumer ===")

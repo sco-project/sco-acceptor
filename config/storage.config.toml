@@ -24,12 +24,12 @@
 
 
 # 消息中心的配置
-[mqueue]
-    # 可以是多条地址记录
-    hosts = "127.0.0.1:9091"
-    # hosts = "mq.apiend.com"
-    # subscribe key
-    subscribe = "tracer"
+[kafka]
+# 可以是多条地址记录
+hosts = "127.0.0.1:9091"
+# hosts = "mq.apiend.com"
+# topic key
+topic = "tracer_hk"
 
 # Logger.
 # 日志配置信息
