@@ -3,6 +3,7 @@ module sco-acceptor
 go 1.16
 
 require (
+	github.com/Shopify/sarama v1.32.0
 	github.com/asim/mq v0.1.0
 	github.com/gogf/gf v1.16.5
 	github.com/ip2location/ip2location-go v8.3.0+incompatible

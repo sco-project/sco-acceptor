@@ -12,6 +12,7 @@ import (
 	"sco-acceptor/app/api/test"
 	"sco-acceptor/app/api/v1"
 	v2 "sco-acceptor/app/api/v2"
+	v3 "sco-acceptor/app/api/v3"
 
 	"sco-acceptor/library/middleware"
 )
@@ -41,6 +42,14 @@ func initBiz(s *ghttp.Server, c *gcfg.Config) {
 	// v2 版本 2021-9-18 15:30:41
 	s.Group(backGlobal+"/v2", func(group *ghttp.RouterGroup) {
 		w := new(v2.ReportCtl)
+		group.Middleware(middleware.CORS)
+		group.Middleware(middleware.NewLimiter(cfg))
+		group.ALL("/{.method}", w)
+	})
+
+	// v3 版本 统一 web / H5 / wx
+	s.Group(backGlobal+"/v3", func(group *ghttp.RouterGroup) {
+		w := new(v3.ReportCtl)
 		group.Middleware(middleware.CORS)
 		group.Middleware(middleware.NewLimiter(cfg))
 		group.ALL("/{.method}", w)
