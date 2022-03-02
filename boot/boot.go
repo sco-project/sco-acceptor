@@ -79,7 +79,6 @@ func init() {
 	}
 	_ = initClient(*cfg)
 
-	// 启动 多个goroutine 用来批量插入及并发的问题
 
 }
 
