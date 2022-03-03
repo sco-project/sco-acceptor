@@ -16,7 +16,7 @@ import (
 type PublicFields struct {
 	ID        primitive.ObjectID `bson:"_id" json:"id"`                                  // 唯一ID
 	CreatedAt time.Time          `bson:"CreatedAt" json:"CreatedAt"`                     // 创建时间 ISODate
-	UpdatedAt time.Time          `bson:"UpdatedAt,omitempty" json:"UpdatedAt,omitempty"` // 修改时间 ISODate
+	UpdatedAt *time.Time          `bson:"UpdatedAt,omitempty" json:"UpdatedAt,omitempty"` // 修改时间 ISODate
 	DeletedAt *time.Time         `bson:"DeletedAt,omitempty" json:"DeletedAt,omitempty"` // 删除时间 ISODate
 	//Ctime     int64              `bson:"ctime,omitempty" json:"ctime,omitempty"`         // 创建时间 TimestampMilli
 }

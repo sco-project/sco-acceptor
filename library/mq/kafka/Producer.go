@@ -67,7 +67,7 @@ func NewKafkaProducer(kafkaUrls []string, topic string, config *sarama.Config) (
 		return nil, err
 	}
 
-	// todo: check 看情况
+	// todo: check 看情况 topic 是否创建
 	if err := NewTopic(kafkaUrls, topic, 3); err != nil {
 		fmt.Printf("NewKafkaProducer: %v\n", err)
 	}

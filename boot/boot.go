@@ -98,8 +98,8 @@ func initMq(conf *kConfig) {
 	kafkaConfig.Producer.Partitioner = sarama.NewReferenceHashPartitioner
 	// 是否等待成功和失败后的响应
 	kafkaConfig.Producer.Return.Successes = true
-	// buffer 每隔多少时间触发flush
-	kafkaConfig.Producer.Flush.Frequency = 5 * time.Second
+	// buffer 每隔多少时间触发flush 100 ms
+	kafkaConfig.Producer.Flush.Frequency = 100 * time.Millisecond
 	// buffer 最多装多少条消息
 	kafkaConfig.Producer.Flush.MaxMessages = 10000
 	// buffer 装多少条消息触发flush
