@@ -21,6 +21,8 @@
     gpoolTimes = 10
     # gpool 消费列表 100
     itemNum = 100
+    # 开启 pprof 分析
+    isopenPProf = true
 
 
 # 消息中心的配置
@@ -71,7 +73,8 @@
     # mongodb://tracer:tracer@127.0.0.1:27017,127.0.0.1:27018/tracer?replicaSet=testSet"
     # mongoURL"mongodb://tracer:tracer@localhost:27017/tracer"
     # mongoUrl = "mongodb://tracer:tracer@localhost:27017/tracer"
-    mongoUrl = "mongodb://tracer:tracer@192.168.137.90:27017/tracer"
+#     mongoUrl = "mongodb://tracer:tracer@192.168.137.90:27017/tracer"
+    mongoUrl = "mongodb://tracer:tracer@192.168.1.246:27017/tracer"
     # mongoName
     mgoDbName = "tracer"
     # 链接池大小

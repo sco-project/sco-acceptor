@@ -11,8 +11,6 @@ import (
 	"github.com/gogf/gf/encoding/gjson"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/glog"
-	"github.com/gogf/gf/util/gconv"
-
 	"sco-acceptor/app/global"
 	"sco-acceptor/app/model"
 	"sco-acceptor/app/service"
@@ -25,8 +23,6 @@ type ReportCtl struct{}
 
 // Report 3.0 上报的接口 主要是用于 监听,wx
 func (c *ReportCtl) Report(r *ghttp.Request) {
-
-
 	// 默认 URL上还是带有 token
 	// 判断是否为,已申请的项目
 	appkey := r.GetString("a")
@@ -82,7 +78,7 @@ func saveReport(appkey string, r *ghttp.Request) {
 		global.AppReportList[appkey] = arr
 	}
 
-	sendAsyncMessage("hk",gconv.String(resblob))
+	//sendAsyncMessage("hk",gconv.String(resblob))
 }
 
 //type KafkaSyncEr struct {

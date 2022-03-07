@@ -34,26 +34,26 @@ type Wxmodel struct {
 	Tracktype    string `bson:"tracktype" json:"tracktype"`
 	Action       string `bson:"action" json:"action"`
 
-	ProductID   string `bson:"product_id,omitempty" json:"product_id,omitempty"`
-	ProductName string `bson:"product_name,omitempty" json:"product_name,omitempty"`
-	Price       string `bson:"price,omitempty" json:"price,omitempty"`
-	PageID      string `bson:"page_id,omitempty" json:"page_id,omitempty"`
-	PageTitle   string `bson:"page_title,omitempty" json:"page_title,omitempty"`
-	PageURL     string `bson:"page_url,omitempty" json:"page_url,omitempty"`
-	PrevPageURL string `bson:"prev_page_url,omitempty" json:"prev_page_url,omitempty"`
-	PrevPageID  string `bson:"prev_page_id,omitempty" json:"prev_page_id,omitempty"`
-	LastPageID  string `bson:"last_page_id,omitempty" json:"last_page_id,omitempty"`
-	LastPageURL string `bson:"last_page_url,omitempty" json:"last_page_url,omitempty"`
+	ProductID   string `bson:"product_id" json:"product_id"`
+	ProductName string `bson:"product_name" json:"product_name"`
+	Price       string `bson:"price" json:"price"`
+	PageID      string `bson:"page_id" json:"page_id"`
+	PageTitle   string `bson:"page_title,omitempty" json:"page_title"`
+	PageURL     string `bson:"page_url,omitempty" json:"page_url"`
+	PrevPageURL string `bson:"prev_page_url,omitempty" json:"prev_page_url"`
+	PrevPageID  string `bson:"prev_page_id,omitempty" json:"prev_page_id"`
+	LastPageID  string `bson:"last_page_id,omitempty" json:"last_page_id"`
+	LastPageURL string `bson:"last_page_url,omitempty" json:"last_page_url"`
 
 	Ip    	string `bson:"ip" json:"ip"`
-	Provice string `bson:"provice,omitempty" json:"provice,omitempty"`
-	City    string `bson:"city,omitempty" json:"city,omitempty"`
-	Area    string `bson:"area,omitempty" json:"area,omitempty"`
+	Provice string `bson:"provice,omitempty" json:"provice"`
+	City    string `bson:"city,omitempty" json:"city"`
+	Area    string `bson:"area,omitempty" json:"area"`
 
-	OpenID    string `bson:"open_id,omitempty" json:"open_id,omitempty"`
-	UnionID   string `bson:"union_id,omitempty" json:"union_id,omitempty"`
-	Phone     string `json:"phone,omitempty" bson:"phone,omitempty"`
-	UserName  string `bson:"user_name,omitempty" json:"user_name,omitempty"`
+	OpenID    string `bson:"open_id,omitempty" json:"open_id"`
+	UnionID   string `bson:"union_id,omitempty" json:"union_id"`
+	Phone     string `json:"phone,omitempty" bson:"phone"`
+	UserName  string `bson:"user_name,omitempty" json:"user_name"`
 	Timestamp int64  `bson:"timestamp" json:"timestamp"`
 }
 

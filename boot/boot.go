@@ -80,6 +80,14 @@ func init() {
 	_ = initClient(*cfg)
 
 
+	isopenPProf := c.GetBool("setting.isopenPProf")
+
+	if isopenPProf {
+		s.EnablePProf()
+		g.Log().Println("开启 pprof 可进行性能分析")
+	}
+
+
 }
 
 // 初始化 kafka 联接
