@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/net/ghttp"
 
 	_ "sco-acceptor/boot"
 	_ "sco-acceptor/router"
@@ -22,7 +21,7 @@ var (
 func main() {
 	g.Log().Println("---当前的版本号---")
 	fmt.Printf("%s\n%s\n%s\n", VERSION, BUILD_TIME, GO_VERSION)
-	go ghttp.StartPProfServer(8199)
+	//go ghttp.StartPProfServer(8199)
 
 	serverAgent := g.Cfg().GetString("system.apiServiceName")
 	g.Server().SetServerAgent(serverAgent)

@@ -22,16 +22,18 @@
     # gpool 消费列表 100
     itemNum = 100
     # 开启 pprof 分析
-    isopenPProf = true
+    isopenPProf = false
 
 
 # 消息中心的配置
 [kafka]
-    # 可以是多条地址记录
-    hosts = ["192.168.1.245:9092"]
-    # hosts = "mq.apiend.com"
-    # topic key
-    topic = "tracer_hk"
+# 是否开启 默认
+isOpen = false
+# 可以是多条地址记录
+hosts = ["192.168.1.245:9092"]
+# hosts = "mq.apiend.com"
+# topic key
+topic = "tracer_hk"
 
 # Logger.
 # 日志配置信息
@@ -72,10 +74,10 @@
     #  // user, password, database, rs0分别为用户名、密码、数据库、副本集，请自行修改
     # mongodb://tracer:tracer@127.0.0.1:27017,127.0.0.1:27018/tracer?replicaSet=testSet"
     # mongoURL"mongodb://tracer:tracer@localhost:27017/tracer"
-    # mongoUrl = "mongodb://tracer:tracer@localhost:27017/tracer"
+mongoUrl = "mongodb://tracer:tracer@localhost:27017/tracer"
 #     mongoUrl = "mongodb://tracer:tracer@192.168.137.90:27017/tracer"
-    mongoUrl = "mongodb://tracer:tracer@192.168.1.246:27017/tracer"
-    # mongoName
+#    mongoUrl = "mongodb://tracer:tracer@192.168.1.246:27017/tracer"
+# mongoName
     mgoDbName = "tracer"
     # 链接池大小
     mgoPoolSize = 200

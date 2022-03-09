@@ -57,11 +57,15 @@ func init() {
 	//options := &PubOption{host: c.GetString("mqueue.hosts")}
 	//go NewMqCliet(*options)
 	//-------------- end
-	kCfg := &kConfig{
-		KafkaUrls:  c.GetStrings("kafka.hosts"),
-		KafkaTopic: c.GetString("kafka.topic"),
+	isOenKafka := c.GetBool("kafka.isOpen")
+
+	if isOenKafka == true {
+		kCfg := &kConfig{
+			KafkaUrls:  c.GetStrings("kafka.hosts"),
+			KafkaTopic: c.GetString("kafka.topic"),
+		}
+		initMq(kCfg)
 	}
-	initMq(kCfg)
 	// --- end
 
 	// 初始化链接 mongodb
@@ -82,7 +86,7 @@ func init() {
 
 	isopenPProf := c.GetBool("setting.isopenPProf")
 
-	if isopenPProf {
+	if isopenPProf == true {
 		s.EnablePProf()
 		g.Log().Println("开启 pprof 可进行性能分析")
 	}

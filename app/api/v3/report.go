@@ -11,6 +11,7 @@ import (
 	"github.com/gogf/gf/encoding/gjson"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/util/gconv"
 	"sco-acceptor/app/global"
 	"sco-acceptor/app/model"
 	"sco-acceptor/app/service"
@@ -64,6 +65,7 @@ func saveReport(appkey string, r *ghttp.Request) {
 	if err = j.Struct(resblob); err != nil {
 		//panic(err)
 		glog.Warning(err)
+		return
 	}
 	//g.Dump(gconv.String(resblob))
 
@@ -78,7 +80,7 @@ func saveReport(appkey string, r *ghttp.Request) {
 		global.AppReportList[appkey] = arr
 	}
 
-	//sendAsyncMessage("hk",gconv.String(resblob))
+	sendAsyncMessage("hk", gconv.String(resblob))
 }
 
 //type KafkaSyncEr struct {
