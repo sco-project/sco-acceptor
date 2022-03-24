@@ -36,6 +36,7 @@ type Wxmodel struct {
 
 	ProductID   string `bson:"product_id" json:"product_id"`
 	ProductName string `bson:"product_name" json:"product_name"`
+	ProductNum  string `bson:"product_num" json:"product_num"`
 	Price       string `bson:"price" json:"price"`
 	PageID      string `bson:"page_id" json:"page_id"`
 	PageTitle   string `bson:"page_title,omitempty" json:"page_title"`
