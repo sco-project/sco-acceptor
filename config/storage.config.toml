@@ -5,7 +5,7 @@
     Environment = "dev"
     # API 服务的名字
     apiServiceName = "storage"
-    # API的端口号
+    # API的端口号,
     apiport = 9003
     # 后台服务地址 prefix
     backGlobal = "/arms"

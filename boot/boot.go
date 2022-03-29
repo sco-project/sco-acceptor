@@ -50,8 +50,8 @@ func init() {
 	s.SetNameToUriType(ghttp.URI_TYPE_CAMEL)
 
 	// 启动端口端口
-	apiPort := c.GetInt("system.apiport")
-	s.SetPort(apiPort)
+	//apiPort := c.GetInt("system.apiport")
+	//s.SetPort(apiPort)
 
 	// 链接 mq
 	//options := &PubOption{host: c.GetString("mqueue.hosts")}
